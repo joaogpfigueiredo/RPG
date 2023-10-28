@@ -1,38 +1,33 @@
 package Personagem;
 
-public class Mercenario extends Personagem {
-    private String armaLonga;
+public class Mercenario extends Soldado {
     private int municoes;
 
-    public Mercenario(String nome, int nivel, int municoes) {
-        super(nome, nivel, 4, 10, 4);
+    public Mercenario(String nome, int nivel, String arma, int municoes) {
+        super(nome, nivel, 4, 10, 4, arma);
         this.municoes = municoes;
-        armaLongaMercenario();
     }
 
-    private void armaLongaMercenario() {
-        int item = (int) (Math.random() * 3) + 1;
-        switch (item) {
-            case 1:
-                this.armaLonga = "Pedras";
-                break;
-            case 2:
-                this.armaLonga = "Arco";
-                break;
-            case 3:
-                this.armaLonga = "Pistola";
-                break;
-            default:
-                break;
+    public int getMunicoes() {
+        return municoes;
+    }
+
+    public void setMunicoes(int municoes) {
+        this.municoes = municoes;
+    }
+
+    public void addMunicoes(int municoesExtra) { this.municoes += municoesExtra; }
+
+    public void removeMunicoes(int removerMunicoes) {
+        if(this.municoes - removerMunicoes >= 0) {
+            this.municoes -= removerMunicoes;
+        }else {
+            System.out.println("\nEste mercenário tem apenas " + this.municoes + " munições, se quiser remover munições tente um valor menor!");
         }
-    }
-
-    public String getArmaLonga() {
-        return this.armaLonga;
     }
 
     @Override
     public String toString() {
-        return super.toString() + "\nMercenário com arma " + armaLonga + " e " + municoes + " munições";
+        return super.toString() + "\nMercenário com " + getArma() + ((this.municoes != 0) ? " mas não possui munições!": " e " + municoes + " munições!");
     }
 }

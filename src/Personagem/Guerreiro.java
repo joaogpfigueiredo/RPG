@@ -1,38 +1,23 @@
 package Personagem;
 
-public class Guerreiro extends Personagem {
-    private boolean temArmadura;
-    private String arma;
+public class Guerreiro extends Soldado {
+    private boolean Armadura;
 
-    public Guerreiro(String nome, int nivel, boolean temArmadura) {
-        super(nome, nivel, 10, 5, 3);
-        this.temArmadura = temArmadura;
-        armaGuerreiro();
-    }
-
-    private void armaGuerreiro() {
-        int item = (int) (Math.random() * 3) + 1;
-        switch (item) {
-            case 1:
-                this.arma = "Espada";
-                break;
-            case 2:
-                this.arma = "Faca";
-                break;
-            case 3:
-                this.arma = "Machado";
-                break;
-            default:
-                break;
-        }
+    public Guerreiro(String nome, int nivel, String arma, boolean Armadura) {
+        super(nome, nivel, 10, 5, 3, arma);
+        this.Armadura = Armadura;
     }
 
     public boolean temArmadura() {
-        return this.temArmadura;
+        return this.Armadura;
+    }
+
+    public void removeArmadura() {
+        this.Armadura = false;
     }
 
     @Override
     public String toString() {
-        return super.toString() + "\nGuerreiro" + (temArmadura ? " com Armadura e " : " sem Armadura mas com ") + arma;
+        return super.toString() + "\nGuerreiro" + (this.Armadura ? " com Armadura e " : " sem Armadura mas com ") + getArma();
     }
 }

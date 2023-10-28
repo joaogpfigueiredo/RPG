@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 import Personagem.*;
@@ -38,12 +39,36 @@ public class PoW {
         }
     }
 
+    private static int nivelRandom(int max) {
+        return new Random().nextInt(max) + 1;
+    }
+
     private static void criarPersonagens(ArrayList<Personagem> personagens) {
         for (int i = 1; i <= 5; i++) {
-            personagens.add(new Guerreiro("Guerreiro " + i, (int) (Math.random() * 25) + 1, (int) (Math.random() * 2) == 1));
-            personagens.add(new Mago("Mago " + i, (int) (Math.random() * 25) + 1));
-            personagens.add(new Mercenario("Mercenário " + i, (int) (Math.random() * 25) + 1, (int) (Math.random() * 20) + 5));
+            personagens.add(new Guerreiro("Guerreiro " + i, nivelRandom(25), armaGuerreiro(), (int) (Math.random() * 2) == 1));
+            personagens.add(new Mago("Mago " + i, nivelRandom(25)));
+            personagens.add(new Mercenario("Mercenário " + i, nivelRandom(25), armaLongaMercenario(), (int) (Math.random() * 20) + 5));
         }
+    }
+
+    private static String armaGuerreiro() {
+        int item = (int) (Math.random() * 3);
+        return switch (item) {
+            case 0 -> "Espada";
+            case 1 -> "Faca";
+            case 2 -> "Machado";
+            default -> null;
+        };
+    }
+
+    private static String armaLongaMercenario() {
+        int item = (int) (Math.random() * 3);
+        return switch (item) {
+            case 0 -> "Pedras";
+            case 1 -> "Arco";
+            case 2 -> "Pistola";
+            default -> null;
+        };
     }
 
     private static void imprimirMenu() {
@@ -76,18 +101,21 @@ public class PoW {
     private static void personagensComItens(ArrayList<Personagem> personagens) {
         System.out.println("\nGuerreiros com armadura, Magos com sementes de abóbora, Mercenários com arcos:");
         for (Personagem personagem : personagens) {
-            if (personagem instanceof Guerreiro guerreiro) {
-                if (guerreiro.temArmadura()) {
-                    System.out.println(guerreiro + "\n");
-                }
-            } else if (personagem instanceof Mago mago) {
-                if (mago.getItensMochila().equals("Sementes de Abóbora")) {
-                    System.out.println(mago + "\n");
-                }
-            } else if (personagem instanceof Mercenario mercenario) {
-                if (mercenario.getArmaLonga().equals("Arco")) {
-                    System.out.println(mercenario + "\n");
-                }
+            switch (personagem) {
+                case Guerreiro guerreiro -> {
+                    if (guerreiro.temArmadura()) {
+                        System.out.println(guerreiro + "\n");
+                    }
+                } case Mago mago -> {
+                    if (mago.temItemNaMochila("Sementes de Abóbora")) {
+                        System.out.println(mago + "\n");
+                    }
+                } case Mercenario mercenario -> {
+                    if (mercenario.temArma("Arco")) {
+                        System.out.println(mercenario + "\n");
+                        }
+                    }
+                default -> {}
             }
         }
     }

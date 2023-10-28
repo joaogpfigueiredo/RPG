@@ -1,47 +1,49 @@
 package Personagem;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Mago extends Personagem {
-    private String mochila;
+    private ArrayList<String> mochila = new ArrayList<>();
 
     public Mago(String nome, int nivel) {
         super(nome, nivel, 2, 4, 9);
-        mochilaItens();
+        this.mochila = mochilaItens();
     }
 
-    private void mochilaItens() {
-        int item = (int) (Math.random() * 6) + 1;
-        switch (item) {
-            case 1:
-                this.mochila = "Sementes de Abóbora";
-                break;
-            case 2:
-                this.mochila = "Sementes de Girasol";
-                break;
-            case 3:
-                this.mochila = "Sementes de Sésamo";
-                break;
-            case 4:
-                this.mochila = "Folhas de Acácia";
-                break;
-            case 5:
-                this.mochila = "Folhas de Acônito";
-                break;
-            case 6:
-                this.mochila = "Folhas de Verbena";
-                break;
-            default:
-                break;
+    private ArrayList<String> mochilaItens() {
+        Random random = new Random();
+        int quantidade = random.nextInt(6) + 1;
+        ArrayList<String> moch = new ArrayList<>();
+        String[] itens = {"Sementes de Abóbora", "Sementes de Girasol", "Sementes de Sésamo", "Folhas de Acácia", "Folhas de Acônito", "Folhas de Verbena"};
+
+        while (moch.size() < quantidade) {
+            int item = random.nextInt(itens.length);
+            if (!moch.contains(itens[item])) {
+                moch.add(itens[item]);
+            }
         }
+        return moch;
     }
 
-    public String getItensMochila() {
-        return  this.mochila;
+    public ArrayList<String> getItensMochila() {
+        return this.mochila;
+    }
+
+    public void addItemMochila(String item) {
+        this.mochila.add(item);
+    }
+
+    public void removeItemMochila(String item) {
+        this.mochila.remove(item);
+    }
+
+    public boolean temItemNaMochila(String item) {
+        return getItensMochila().contains(item);
     }
 
     @Override
     public String toString() {
-        return super.toString() + "\nMago com mochila de " + mochila;
+        return super.toString() + "\nA mochila deste mago" + (mochila.isEmpty() ? " está vazia!": " contém: " + getItensMochila());
     }
 }

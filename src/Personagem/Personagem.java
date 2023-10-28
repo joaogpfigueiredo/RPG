@@ -16,40 +16,41 @@ public class Personagem {
     }
 
     public String getNome() {
-        return nome;
+        return this.nome;
     }
+
+    public String mudarNome(String nome) { this.nome = nome; };
 
     public int getNivel() {
         return nivel;
     }
 
-    public void setNivel(int n) {
-        this.nivel = n;
+    public void setNivel(int nivel) {
+        this.nivel = nivel;
     }
 
     public double getForca() {
         return forca;
     }
 
-    public void setForca(double f) {
-        this.forca = f;
+    public void setForca(double forca) {
+        this.forca = forca;
     }
 
     public double getAgilidade() {
         return agilidade;
     }
 
-    public void setAgilidade(double a) {
-        this.agilidade = a;
+    public void setAgilidade(double agilidade) {
+        this.agilidade = agilidade;
     }
-
 
     public double getInteligencia() {
         return inteligencia;
     }
 
-    public void setInteligencia(double i) {
-        this.inteligencia = i;
+    public void setInteligencia(double inteligencia) {
+        this.inteligencia = inteligencia;
     }
 
 
