@@ -19,7 +19,7 @@ public class Personagem {
         return this.nome;
     }
 
-    public String mudarNome(String nome) { this.nome = nome; };
+    public void mudarNome(String nome) { this.nome = nome; };
 
     public int getNivel() {
         return nivel;
