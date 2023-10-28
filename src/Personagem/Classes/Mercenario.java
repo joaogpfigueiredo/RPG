@@ -5,7 +5,7 @@ import Personagem.Soldado;
 public class Mercenario extends Soldado {
     private int municoes;
 
-    public Mercenario(String nome, int nivel, String arma, int municoes) {
+    public Mercenario(String nome, int nivel, String[] arma, int municoes) {
         super(nome, nivel, 4, 10, 4, arma);
         this.municoes = municoes;
     }
@@ -30,6 +30,6 @@ public class Mercenario extends Soldado {
 
     @Override
     public String toString() {
-        return super.toString() + "\nMercenário com " + getArma() + ((this.municoes != 0) ? " mas não possui munições!": " e " + municoes + " munições!");
+        return super.toString() + "\nMercenário com " + getArma() + ((this.municoes == 0) ? " mas não possui munições!": " e " + municoes + " munições!");
     }
 }

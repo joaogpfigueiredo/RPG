@@ -1,11 +1,11 @@
 package Personagem;
 
-public class Soldado extends  Personagem {
+public class Soldado extends Personagem {
     private String arma;
 
-    public Soldado(String nome, int nivel, double forca, double agilidade, double inteligencia, String arma) {
+    public Soldado(String nome, int nivel, double forca, double agilidade, double inteligencia, String[] armas) {
         super(nome, nivel, forca, agilidade, inteligencia);
-        this.arma = arma;
+        this.arma = escolherArma(armas);
     }
 
     public String getArma() {
@@ -14,6 +14,11 @@ public class Soldado extends  Personagem {
 
     public void setArma(String arma) {
         this.arma = arma;
+    }
+
+    public String escolherArma(String[] armas) {
+        int index = (int) (Math.random() * armas.length);
+        return armas[index];
     }
 
     public boolean temArma(String arma) {

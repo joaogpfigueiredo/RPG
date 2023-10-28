@@ -5,7 +5,7 @@ import Personagem.Soldado;
 public class Guerreiro extends Soldado {
     private boolean Armadura;
 
-    public Guerreiro(String nome, int nivel, String arma, boolean Armadura) {
+    public Guerreiro(String nome, int nivel, String[] arma, boolean Armadura) {
         super(nome, nivel, 10, 5, 3, arma);
         this.Armadura = Armadura;
     }

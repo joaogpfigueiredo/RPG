@@ -48,30 +48,10 @@ public class PoW {
 
     private static void criarPersonagens(ArrayList<Personagem> personagens) {
         for (int i = 1; i <= 5; i++) {
-            personagens.add(new Guerreiro("Guerreiro " + i, nivelRandom(25), armaGuerreiro(), (int) (Math.random() * 2) == 1));
+            personagens.add(new Guerreiro("Guerreiro " + i, nivelRandom(25), new String[] {"Espada", "Machado", "Faca"}, (int) (Math.random() * 2) == 1));
             personagens.add(new Mago("Mago " + i, nivelRandom(25)));
-            personagens.add(new Mercenario("Mercenário " + i, nivelRandom(25), armaLongaMercenario(), (int) (Math.random() * 20) + 5));
+            personagens.add(new Mercenario("Mercenário " + i, nivelRandom(25), new String[] {"Arco", "Pistola", "Pedras"}, (int) (Math.random() * 20) + 5));
         }
-    }
-
-    private static String armaGuerreiro() {
-        int item = (int) (Math.random() * 3);
-        return switch (item) {
-            case 0 -> "Espada";
-            case 1 -> "Faca";
-            case 2 -> "Machado";
-            default -> null;
-        };
-    }
-
-    private static String armaLongaMercenario() {
-        int item = (int) (Math.random() * 3);
-        return switch (item) {
-            case 0 -> "Pedras";
-            case 1 -> "Arco";
-            case 2 -> "Pistola";
-            default -> null;
-        };
     }
 
     private static void imprimirMenu() {
