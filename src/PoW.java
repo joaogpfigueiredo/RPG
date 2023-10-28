@@ -3,6 +3,9 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Personagem.*;
+import Personagem.Classes.Guerreiro;
+import Personagem.Classes.Mago;
+import Personagem.Classes.Mercenario;
 
 public class PoW {
     public static void main(String[] args) {

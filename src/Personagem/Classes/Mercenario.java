@@ -1,4 +1,6 @@
-package Personagem;
+package Personagem.Classes;
+
+import Personagem.Soldado;
 
 public class Mercenario extends Soldado {
     private int municoes;

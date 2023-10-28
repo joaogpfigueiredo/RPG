@@ -1,4 +1,6 @@
-package Personagem;
+package Personagem.Classes;
+
+import Personagem.Personagem;
 
 import java.util.ArrayList;
 import java.util.Random;

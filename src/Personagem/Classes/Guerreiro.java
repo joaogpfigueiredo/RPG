@@ -1,4 +1,6 @@
-package Personagem;
+package Personagem.Classes;
+
+import Personagem.Soldado;
 
 public class Guerreiro extends Soldado {
     private boolean Armadura;
