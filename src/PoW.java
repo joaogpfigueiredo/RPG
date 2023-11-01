@@ -33,7 +33,7 @@ public class PoW {
                     estatisticasPersonagem(personagens);
                     break;
                 case 5:
-                    subirNivel(personagens);
+                    subirNivelPersonagens(personagens, sc);
                     break;
                 case 6:
                     System.out.println("\nAté à próxima!");
@@ -60,7 +60,7 @@ public class PoW {
         System.out.println("2 → Visualizar todas as personagens com nível superior a 10;");
         System.out.println("3 → Visualizar todos os Guerreiros com Armadura, Magos com sementes de abóbora e Mercenários com arcos;");
         System.out.println("4 → Visualizar estatísticas de um personagem;");
-        System.out.println("5 → Fazer um dos personagens subir de nível;");
+        System.out.println("5 → Subir níveis de personagens;");
         System.out.println("6 → Fechar o jogo.");
         System.out.print("> ");
     }
@@ -113,33 +113,68 @@ public class PoW {
         }
     }
 
-    private static  void subirNivel(ArrayList<Personagem> personagens) {
-        Personagem personagem = encontrarPersonagem(personagens);
+    private static  void subirNivelPersonagens(ArrayList<Personagem> personagens, Scanner sc) {
+        int escolha = 0;
 
-        if (personagem != null) {
-            System.out.printf("\nPersonagem Antes de Subir de Nível:\nNível: %d\nForça: %.2f\nAgilidade: %.2f\nInteligência: %.2f\n", personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
-            switch (personagem) {
-                case Guerreiro guerreiro -> {
-                    guerreiro.setForca(guerreiro.getForca() * 1.2);
-                    guerreiro.setAgilidade(guerreiro.getAgilidade() * 1.1);
-                    guerreiro.setInteligencia(guerreiro.getInteligencia() * 1.05);
-                } case Mago mago -> {
-                    mago.setForca(mago.getForca() * 1.05);
-                    mago.setAgilidade(mago.getAgilidade() * 1.1);
-                    mago.setInteligencia(mago.getInteligencia() * 1.2);
-                } case Mercenario mercenario -> {
-                    mercenario.setForca(mercenario.getForca() * 1.08);
-                    mercenario.setAgilidade(mercenario.getAgilidade() * 1.2);
-                    mercenario.setInteligencia(mercenario.getInteligencia() * 1.08);
+        while (escolha != 3) {
+
+            System.out.println("--------------------- Menu de Subir Niveis ---------------------");
+            System.out.println("1 → Subir nível de apenas um personagem;");
+            System.out.println("2 → Subir nível de todos os personagens;");
+            System.out.println("3 → Voltar ao menu principal.");
+            System.out.print("> ");
+
+            escolha = sc.nextInt();
+
+            if (escolha > 0 && escolha < 3) {
+                System.out.print("\nQuantos níveis quer subir: ");
+                int niveis = sc.nextInt();
+
+                if (niveis >= 0) {
+                    switch (escolha) {
+                        case 1:
+                            Personagem personagem = encontrarPersonagem(personagens);
+                            if (personagem != null) {
+                                subirNivel(personagem, niveis);
+                            } else {
+                                System.out.println("\nPersonagem não encontrado!\n");
+                            }
+                            break;
+                        case 2:
+                            for (Personagem p : personagens) {
+                                subirNivel(p, niveis);
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                } else {
+                    System.out.println("\nNúmero de niveís a subir inválido!\n");
                 }
-                default -> {}
             }
-
-            personagem.setNivel(personagem.getNivel() + 1);
-            System.out.printf("\nPersonagem Antes de Subir de Nível:\nNível: %d\nForça: %.2f\nAgilidade: %.2f\nInteligência: %.2f\n", personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
-        }else {
-            System.out.println("\nPersonagem não encontrado!\n");
         }
+    }
+
+    private static void subirNivel(Personagem personagem, int quantosNiveis) {
+        System.out.printf("\n%s antes de subir de nível:\nNível: %d\nForça: %.2f\nAgilidade: %.2f\nInteligência: %.2f\n",personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
+        switch (personagem) {
+            case Guerreiro guerreiro -> {
+                guerreiro.setForca(guerreiro.getForca() * (1.2 * quantosNiveis));
+                guerreiro.setAgilidade(guerreiro.getAgilidade() * (1.1 * quantosNiveis));
+                guerreiro.setInteligencia(guerreiro.getInteligencia() * (1.05 * quantosNiveis));
+            }case Mago mago -> {
+                mago.setForca(mago.getForca() * (1.05 * quantosNiveis));
+                mago.setAgilidade(mago.getAgilidade() * (1.1 * quantosNiveis));
+                mago.setInteligencia(mago.getInteligencia() * (1.2 * quantosNiveis));
+            }case Mercenario mercenario -> {
+                mercenario.setForca(mercenario.getForca() * (1.08 * quantosNiveis));
+                mercenario.setAgilidade(mercenario.getAgilidade() * (1.2 * quantosNiveis));
+                mercenario.setInteligencia(mercenario.getInteligencia() * (1.08 * quantosNiveis));
+            }default -> {}
+        }
+
+        personagem.setNivel(personagem.getNivel() + quantosNiveis);
+        System.out.printf("\n%s depois de subir de nível:\nNível: %d\nForça: %.2f\nAgilidade: %.2f\nInteligência: %.2f\n",personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
     }
 
     private static Personagem encontrarPersonagem(ArrayList<Personagem> personagens)  {
