@@ -66,19 +66,23 @@ public class PoW {
     }
 
     private static void imprimirPersonagens(ArrayList<Personagem> personagens) {
-        System.out.println("\nTodos os personagens:");
+        System.out.println("\n-------------------- Tabela de Personagens --------------------");
+        System.out.printf("| %-14s | %-2s | %-7s | %-7s | %-7s |\n", "Nome", "Nível", "Força", "Agilidade", "Inteligência");
         for (Personagem personagem : personagens) {
-            System.out.println(personagem + "\n");
+            System.out.printf("| %-14s | %-5d | %7.2f | %9.2f | %12.2f |\n", personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
         }
+        System.out.println("---------------------------------------------------------------");
     }
 
     private static void nivelSuperior(ArrayList<Personagem> personagens) {
-        System.out.println("\nPersonagens com nível superior a 10:");
+        System.out.println("\n------------- Personagens com Nível Superior a 10 -------------");
+        System.out.printf("| %-14s | %-2s | %-7s | %-7s | %-7s |\n", "Nome", "Nível", "Força", "Agilidade", "Inteligência");
         for (Personagem personagem : personagens) {
             if (personagem.getNivel() > 10) {
-                System.out.println(personagem + "\n");
+                System.out.printf("| %-14s | %-5d | %7.2f | %9.2f | %12.2f |\n", personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
             }
         }
+        System.out.println("---------------------------------------------------------------");
     }
 
     private static void personagensComItens(ArrayList<Personagem> personagens) {
@@ -135,15 +139,21 @@ public class PoW {
                         case 1:
                             Personagem personagem = encontrarPersonagem(personagens);
                             if (personagem != null) {
+                                System.out.printf("\n%s antes de subir de nível:\nNível: %d\nForça: %.2f\nAgilidade: %.2f\nInteligência: %.2f\n",personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
                                 subirNivel(personagem, niveis);
+                                System.out.printf("\n%s depois de subir de nível:\nNível: %d\nForça: %.2f\nAgilidade: %.2f\nInteligência: %.2f\n",personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
                             } else {
                                 System.out.println("\nPersonagem não encontrado!\n");
                             }
                             break;
                         case 2:
+                            System.out.println("\nPersonagens antes subir o nível:");
+                            imprimirPersonagens(personagens);
                             for (Personagem p : personagens) {
                                 subirNivel(p, niveis);
                             }
+                            System.out.println("\nPersonagens após subir o nível:");
+                            imprimirPersonagens(personagens);
                             break;
                         default:
                             break;
@@ -156,7 +166,6 @@ public class PoW {
     }
 
     private static void subirNivel(Personagem personagem, int quantosNiveis) {
-        System.out.printf("\n%s antes de subir de nível:\nNível: %d\nForça: %.2f\nAgilidade: %.2f\nInteligência: %.2f\n",personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
         switch (personagem) {
             case Guerreiro guerreiro -> {
                 guerreiro.setForca(guerreiro.getForca() * (1.2 * quantosNiveis));
@@ -174,8 +183,7 @@ public class PoW {
         }
 
         personagem.setNivel(personagem.getNivel() + quantosNiveis);
-        System.out.printf("\n%s depois de subir de nível:\nNível: %d\nForça: %.2f\nAgilidade: %.2f\nInteligência: %.2f\n",personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
-    }
+        }
 
     private static Personagem encontrarPersonagem(ArrayList<Personagem> personagens)  {
         Scanner sn = new Scanner(System.in);
