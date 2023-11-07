@@ -13,34 +13,36 @@ public class PoW {
         criarPersonagens(personagens);
 
         Scanner sc = new Scanner(System.in);
-        int escolha = 0;
+        char escolha;
+            do {
+                imprimirMenu();
+                escolha = sc.next().charAt(0);
 
-        while (escolha != 6) {
-            imprimirMenu();
-            escolha = sc.nextInt();
-
-            switch (escolha) {
-                case 1:
-                    imprimirPersonagens(personagens);
-                    break;
-                case 2:
-                    nivelSuperior(personagens);
-                    break;
-                case 3:
-                    personagensComItens(personagens);
-                    break;
-                case 4:
-                    estatisticasPersonagem(personagens);
-                    break;
-                case 5:
-                    subirNivelPersonagens(personagens, sc);
-                    break;
-                case 6:
-                    System.out.println("\nAté à próxima!");
-                    break;
-            }
+                switch (escolha) {
+                    case '1':
+                        imprimirPersonagens(personagens);
+                        break;
+                    case '2':
+                        nivelSuperior(personagens);
+                        break;
+                    case '3':
+                        personagensComItens(personagens);
+                        break;
+                    case '4':
+                        estatisticasPersonagem(personagens);
+                        break;
+                    case '5':
+                        subirNivelPersonagens(personagens, sc);
+                        break;
+                    case '6':
+                        System.out.println("\nAté à próxima!");
+                        break;
+                    default:
+                        System.out.println("\nOpção inválida, tente novamente.\n");
+                        break;
+                }
+            }while(escolha != '6');
         }
-    }
 
     private static int nivelRandom(int max) {
         return new Random().nextInt(max) + 1;
@@ -66,12 +68,12 @@ public class PoW {
     }
 
     private static void imprimirPersonagens(ArrayList<Personagem> personagens) {
-        System.out.println("\n-------------------- Tabela de Personagens --------------------");
-        System.out.printf("| %-14s | %-2s | %-7s | %-7s | %-7s |\n", "Nome", "Nível", "Força", "Agilidade", "Inteligência");
+        System.out.println("\n------------------------------------ Tabela de Personagens ------------------------------------");
+        System.out.printf("| %-16s | %-15s | %-16s | %-16s | %-16s |\n", "Nome", "Nível", "Força", "Agilidade", "Inteligência");
         for (Personagem personagem : personagens) {
-            System.out.printf("| %-14s | %-5d | %7.2f | %9.2f | %12.2f |\n", personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
+            System.out.printf("| %-16s | %-15d | %-16.2f | %-16.2f | %-16.2f |\n", personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
         }
-        System.out.println("---------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------------------------");
     }
 
     private static void nivelSuperior(ArrayList<Personagem> personagens) {
@@ -86,25 +88,27 @@ public class PoW {
     }
 
     private static void personagensComItens(ArrayList<Personagem> personagens) {
-        System.out.println("\nGuerreiros com armadura, Magos com sementes de abóbora, Mercenários com arcos:");
+        System.out.println("\n------------------------------------ Tabela de Personagens ------------------------------------");
+        System.out.printf("| %-16s | %-15s | %-16s | %-16s | %-16s |\n", "Nome", "Nível", "Força", "Agilidade", "Inteligência");
         for (Personagem personagem : personagens) {
             switch (personagem) {
                 case Guerreiro guerreiro -> {
                     if (guerreiro.temArmadura()) {
-                        System.out.println(guerreiro + "\n");
+                        System.out.printf("| %-16s | %-15d | %-16.2f | %-16.2f | %-16.2f |\n", personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
                     }
                 } case Mago mago -> {
                     if (mago.temItemNaMochila("Sementes de Abóbora")) {
-                        System.out.println(mago + "\n");
+                        System.out.printf("| %-16s | %-15d | %-16.2f | %-16.2f | %-16.2f |\n", personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
                     }
                 } case Mercenario mercenario -> {
                     if (mercenario.temArma("Arco")) {
-                        System.out.println(mercenario + "\n");
+                        System.out.printf("| %-16s | %-15d | %-16.2f | %-16.2f | %-16.2f |\n", personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
                         }
                     }
                 default -> {}
             }
         }
+        System.out.println("-----------------------------------------------------------------------------------------------");
     }
 
     private static void estatisticasPersonagem(ArrayList<Personagem> personagens) {
@@ -118,35 +122,32 @@ public class PoW {
     }
 
     private static  void subirNivelPersonagens(ArrayList<Personagem> personagens, Scanner sc) {
-        int escolha = 0;
-
-        while (escolha != 3) {
-
+        char escolha;
+        do {
             System.out.println("--------------------- Menu de Subir Niveis ---------------------");
             System.out.println("1 → Subir nível de apenas um personagem;");
             System.out.println("2 → Subir nível de todos os personagens;");
             System.out.println("3 → Voltar ao menu principal.");
             System.out.print("> ");
 
-            escolha = sc.nextInt();
-
-            if (escolha > 0 && escolha < 3) {
+            escolha = sc.next().charAt(0);
+            if(Character.isDigit(escolha) && escolha >= '1' && escolha < '3') {
                 System.out.print("\nQuantos níveis quer subir: ");
                 int niveis = sc.nextInt();
 
                 if (niveis >= 0) {
                     switch (escolha) {
-                        case 1:
+                        case '1':
                             Personagem personagem = encontrarPersonagem(personagens);
                             if (personagem != null) {
-                                System.out.printf("\n%s antes de subir de nível:\nNível: %d\nForça: %.2f\nAgilidade: %.2f\nInteligência: %.2f\n",personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
+                                System.out.printf("\n%s antes de subir de nível:\nNível: %d\nForça: %.2f\nAgilidade: %.2f\nInteligência: %.2f\n", personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
                                 subirNivel(personagem, niveis);
-                                System.out.printf("\n%s depois de subir de nível:\nNível: %d\nForça: %.2f\nAgilidade: %.2f\nInteligência: %.2f\n",personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
+                                System.out.printf("\n%s depois de subir de nível:\nNível: %d\nForça: %.2f\nAgilidade: %.2f\nInteligência: %.2f\n", personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
                             } else {
                                 System.out.println("\nPersonagem não encontrado!\n");
                             }
                             break;
-                        case 2:
+                        case '2':
                             System.out.println("\nPersonagens antes subir o nível:");
                             imprimirPersonagens(personagens);
                             for (Personagem p : personagens) {
@@ -155,14 +156,16 @@ public class PoW {
                             System.out.println("\nPersonagens após subir o nível:");
                             imprimirPersonagens(personagens);
                             break;
-                        default:
-                            break;
                     }
-                } else {
+                }else {
                     System.out.println("\nNúmero de niveís a subir inválido!\n");
                 }
+            }else {
+                if(escolha != '3') {
+                    System.out.println("\nOpção inválida, tente novamente.\n");
+                }
             }
-        }
+        }while(escolha != '3');
     }
 
     private static void subirNivel(Personagem personagem, int quantosNiveis) {
