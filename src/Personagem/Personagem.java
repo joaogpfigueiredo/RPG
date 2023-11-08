@@ -56,6 +56,6 @@ public class Personagem {
 
     @Override
     public String toString() {
-        return "Nome: " + nome + "\nNível: " + nivel;
+        return "Nome: " + nome + "\nNível: " + nivel + "\nForça: " + forca + "\nAgilidade: " + agilidade + "\nInteligência: " + inteligencia;
     }
 }

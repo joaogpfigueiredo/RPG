@@ -115,7 +115,17 @@ public class PoW {
         Personagem personagem = encontrarPersonagem(personagens);
 
         if(personagem != null) {
-            System.out.printf("\nEstatísticas de %s:\nNível: %d\nForça: %.2f\nAgilidade: %.2f\nInteligência: %.2f\n",personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
+            System.out.print("\n");
+            switch (personagem) {
+                case Guerreiro guerreiro -> {
+                    System.out.println(guerreiro);
+                }case Mago mago -> {
+                    System.out.println(mago);
+                }case Mercenario mercenario -> {
+                    System.out.println(mercenario);
+                }default -> {}
+            }
+            System.out.print("\n");
         }else {
             System.out.println("\nPersonagem não encontrado!\n");
         }
