@@ -77,18 +77,18 @@ public class PoW {
     }
 
     private static void nivelSuperior(ArrayList<Personagem> personagens) {
-        System.out.println("\n------------- Personagens com Nível Superior a 10 -------------");
-        System.out.printf("| %-14s | %-2s | %-7s | %-7s | %-7s |\n", "Nome", "Nível", "Força", "Agilidade", "Inteligência");
+        System.out.println("\n------------------------------- Personagens Nível Superior a 10 -------------------------------");
+        System.out.printf("| %-16s | %-15s | %-16s | %-16s | %-16s |\n", "Nome", "Nível", "Força", "Agilidade", "Inteligência");
         for (Personagem personagem : personagens) {
             if (personagem.getNivel() > 10) {
-                System.out.printf("| %-14s | %-5d | %7.2f | %9.2f | %12.2f |\n", personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
+                System.out.printf("| %-16s | %-15d | %-16.2f | %-16.2f | %-16.2f |\n", personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
             }
         }
-        System.out.println("---------------------------------------------------------------");
+        System.out.println("-----------------------------------------------------------------------------------------------");
     }
 
     private static void personagensComItens(ArrayList<Personagem> personagens) {
-        System.out.println("\n------------------------------------ Tabela de Personagens ------------------------------------");
+        System.out.println("\n------------------------------------ Personagens com Itens ------------------------------------");
         System.out.printf("| %-16s | %-15s | %-16s | %-16s | %-16s |\n", "Nome", "Nível", "Força", "Agilidade", "Inteligência");
         for (Personagem personagem : personagens) {
             switch (personagem) {
