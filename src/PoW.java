@@ -151,7 +151,7 @@ public class PoW {
                             Personagem personagem = encontrarPersonagem(personagens);
                             if (personagem != null) {
                                 System.out.printf("\n%s antes de subir de nível:\nNível: %d\nForça: %.2f\nAgilidade: %.2f\nInteligência: %.2f\n", personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
-                                subirNivel(personagem, niveis);
+                                personagem.subirNivel(niveis);
                                 System.out.printf("\n%s depois de subir de nível:\nNível: %d\nForça: %.2f\nAgilidade: %.2f\nInteligência: %.2f\n", personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
                             } else {
                                 System.out.println("\nPersonagem não encontrado!\n");
@@ -161,7 +161,7 @@ public class PoW {
                             System.out.println("\nPersonagens antes subir o nível:");
                             imprimirPersonagens(personagens);
                             for (Personagem p : personagens) {
-                                subirNivel(p, niveis);
+                                p.subirNivel(niveis);
                             }
                             System.out.println("\nPersonagens após subir o nível:");
                             imprimirPersonagens(personagens);
@@ -177,26 +177,6 @@ public class PoW {
             }
         }while(escolha != '3');
     }
-
-    private static void subirNivel(Personagem personagem, int quantosNiveis) {
-        switch (personagem) {
-            case Guerreiro guerreiro -> {
-                guerreiro.setForca(guerreiro.getForca() * (1.2 * quantosNiveis));
-                guerreiro.setAgilidade(guerreiro.getAgilidade() * (1.1 * quantosNiveis));
-                guerreiro.setInteligencia(guerreiro.getInteligencia() * (1.05 * quantosNiveis));
-            }case Mago mago -> {
-                mago.setForca(mago.getForca() * (1.05 * quantosNiveis));
-                mago.setAgilidade(mago.getAgilidade() * (1.1 * quantosNiveis));
-                mago.setInteligencia(mago.getInteligencia() * (1.2 * quantosNiveis));
-            }case Mercenario mercenario -> {
-                mercenario.setForca(mercenario.getForca() * (1.08 * quantosNiveis));
-                mercenario.setAgilidade(mercenario.getAgilidade() * (1.2 * quantosNiveis));
-                mercenario.setInteligencia(mercenario.getInteligencia() * (1.08 * quantosNiveis));
-            }default -> {}
-        }
-
-        personagem.setNivel(personagem.getNivel() + quantosNiveis);
-        }
 
     private static Personagem encontrarPersonagem(ArrayList<Personagem> personagens)  {
         Scanner sn = new Scanner(System.in);

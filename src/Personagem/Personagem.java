@@ -19,7 +19,7 @@ public class Personagem {
         return this.nome;
     }
 
-    public void mudarNome(String nome) { this.nome = nome; };
+    public void setNome(String nome) { this.nome = nome; };
 
     public int getNivel() {
         return nivel;
@@ -53,6 +53,7 @@ public class Personagem {
         this.inteligencia = inteligencia;
     }
 
+    public void subirNivel(int quantosNiveis) {}
 
     @Override
     public String toString() {

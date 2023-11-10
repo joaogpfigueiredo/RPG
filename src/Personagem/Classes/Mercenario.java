@@ -20,12 +20,11 @@ public class Mercenario extends Soldado {
 
     public void addMunicoes(int municoesExtra) { this.municoes += municoesExtra; }
 
-    public void removeMunicoes(int removerMunicoes) {
-        if(this.municoes - removerMunicoes >= 0) {
-            this.municoes -= removerMunicoes;
-        }else {
-            System.out.println("\nEste mercenário tem apenas " + this.municoes + " munições, se quiser remover munições tente um valor menor!");
-        }
+    public void subirNivel(int quantosNiveis) {
+        setForca(getForca() * (1.08 * quantosNiveis));
+        setAgilidade(getAgilidade() * (1.2 * quantosNiveis));
+        setInteligencia(getInteligencia() * (1.08 * quantosNiveis));
+        setNivel(getNivel() + quantosNiveis);
     }
 
     @Override

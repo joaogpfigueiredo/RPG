@@ -14,8 +14,15 @@ public class Guerreiro extends Soldado {
         return this.Armadura;
     }
 
-    public void removeArmadura() {
+    public void removerArmadura() {
         this.Armadura = false;
+    }
+
+    public void subirNivel(int quantosNiveis) {
+        setForca(getForca() * (1.2 * quantosNiveis));
+        setAgilidade(getAgilidade() * (1.1 * quantosNiveis));
+        setInteligencia(getInteligencia() * (1.05 * quantosNiveis));
+        setNivel(getNivel() + quantosNiveis);
     }
 
     @Override

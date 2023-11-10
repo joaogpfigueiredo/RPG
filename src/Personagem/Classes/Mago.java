@@ -36,12 +36,19 @@ public class Mago extends Personagem {
         this.mochila.add(item);
     }
 
-    public void removeItemMochila(String item) {
+    public void removerItemMochila(String item) {
         this.mochila.remove(item);
     }
 
     public boolean temItemNaMochila(String item) {
         return getItensMochila().contains(item);
+    }
+
+    public void subirNivel(int quantosNiveis) {
+        setForca(getForca() * (1.05 * quantosNiveis));
+        setAgilidade(getAgilidade() * (1.1 * quantosNiveis));
+        setInteligencia(getInteligencia() * (1.2 * quantosNiveis));
+        setNivel(getNivel() + quantosNiveis);
     }
 
     @Override
