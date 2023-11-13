@@ -1,6 +1,6 @@
 package Personagem;
 
-public class Soldado extends Personagem {
+public abstract class Soldado extends Personagem {
     private String arma;
 
     public Soldado(String nome, int nivel, double forca, double agilidade, double inteligencia, String[] armas) {
@@ -24,4 +24,6 @@ public class Soldado extends Personagem {
     public boolean temArma(String arma) {
         return (getArma().equals(arma));
     }
+
+    public abstract void subirNivel(int quantosNiveis);
 }

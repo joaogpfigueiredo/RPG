@@ -1,6 +1,6 @@
 package Personagem;
 
-public class Personagem {
+public abstract class Personagem {
     private String nome;
     private int nivel;
     private double forca;
@@ -53,7 +53,7 @@ public class Personagem {
         this.inteligencia = inteligencia;
     }
 
-    public void subirNivel(int quantosNiveis) {}
+    public abstract void subirNivel(int quantosNiveis);
 
     @Override
     public String toString() {
