@@ -141,17 +141,26 @@ public class PoW {
             System.out.print("> ");
 
             escolha = sc.next().charAt(0);
+            sc.nextLine();
+
             if(Character.isDigit(escolha) && escolha >= '1' && escolha < '3') {
                 System.out.print("\nQuantos níveis quer subir: ");
-                int niveis = sc.nextInt();
+                String niveis = sc.nextLine();
 
-                if (niveis >= 0) {
+                for(int n = 0; n < niveis.length(); n++) {
+                    if(!Character.isDigit(niveis.charAt(n))) {
+                        niveis = "0";
+                        break;
+                    }
+                }
+
+                if (Integer.parseInt(niveis) > 0) {
                     switch (escolha) {
                         case '1':
                             Personagem personagem = encontrarPersonagem(personagens);
                             if (personagem != null) {
                                 System.out.printf("\n%s antes de subir de nível:\nNível: %d\nForça: %.2f\nAgilidade: %.2f\nInteligência: %.2f\n", personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
-                                personagem.subirNivel(niveis);
+                                personagem.subirNivel(Integer.parseInt(niveis));
                                 System.out.printf("\n%s depois de subir de nível:\nNível: %d\nForça: %.2f\nAgilidade: %.2f\nInteligência: %.2f\n", personagem.getNome(), personagem.getNivel(), personagem.getForca(), personagem.getAgilidade(), personagem.getInteligencia());
                             } else {
                                 System.out.println("\nPersonagem não encontrado!\n");
@@ -161,7 +170,7 @@ public class PoW {
                             System.out.println("\nPersonagens antes subir o nível:");
                             imprimirPersonagens(personagens);
                             for (Personagem p : personagens) {
-                                p.subirNivel(niveis);
+                                p.subirNivel(Integer.parseInt(niveis));
                             }
                             System.out.println("\nPersonagens após subir o nível:");
                             imprimirPersonagens(personagens);

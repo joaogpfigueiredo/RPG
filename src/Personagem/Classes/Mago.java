@@ -17,7 +17,7 @@ public class Mago extends Personagem {
         Random random = new Random();
         int quantidade = random.nextInt(6) + 1;
         ArrayList<String> moch = new ArrayList<>();
-        String[] itens = {"Sementes de Abóbora", "Sementes de Girasol", "Sementes de Sésamo", "Folhas de Acácia", "Folhas de Acônito", "Folhas de Verbena"};
+        String[] itens = {"Sementes de Abóbora", "Sementes de Girassol", "Sementes de Sésamo", "Folhas de Acácia", "Folhas de Acônito", "Folhas de Verbena"};
 
         while (moch.size() < quantidade) {
             int item = random.nextInt(itens.length);
